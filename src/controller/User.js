@@ -140,7 +140,7 @@ const resetPassword = async (req, res) => {
 
 const ListAllUsers = async (req, res) =>{
     try {
-        let allUsers = await userModel.find({}, {randomString:0 , _id: 0 })
+        let allUsers = await userModel.find({}, { _id: 0 })
         res.status(200).send({
             message: "All users Data",
             disclaimer:"Since this is a project, to be tested it shows password, in real time password will be hashed",
