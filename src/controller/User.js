@@ -24,6 +24,37 @@ const create = async (req, res) => {
     }
 }
 
+const login = async (req, res) => {
+    try {
+        let user = await userModel.findOne({ email: req.body.email })
+        if (user) {
+            let passCompare = req.body.password === user.password
+            if (passCompare) {
+                let userData = await userModel.findOne({ email: req.body.email },{_id:0,password:0,status:0,createdAt:0,email:0})
+                res.status(200).send({
+                    message: "Login Successful",
+                    userData : userData
+                })
+            }
+            else {
+                res.status(400).send({
+                    message: "Invalid Password"
+                })
+            }
+        }
+        else {
+            res.status(400).send({
+                message: `Account with ${req.body.email} does not exist`
+            })
+        }
+    } catch (error) {
+        res.status(500).send({
+            message: "Internal Server Error",
+            error: error.message
+        })
+    }
+}
+
 
 const forgotPassword = async (req, res) => {
     try {
@@ -160,5 +191,6 @@ export default {
     forgotPassword,
     getUsers,
     resetPassword,
-    ListAllUsers
+    ListAllUsers,
+    login
 }

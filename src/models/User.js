@@ -6,6 +6,8 @@ const validateEmail = (e)=>{
 }
 
 const userSchema = new mongoose.Schema({
+    name:{type:String,required:[true,"Name is required"]},
+    mobile:{type:Number,required:[true,"Mobile Number is required"]},
     email:{type:String,required:[true,"Email is required"],validate:validateEmail},
     password:{type:String,required:[true,"Password is required"]},
     randomString:{type:String}

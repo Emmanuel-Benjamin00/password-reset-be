@@ -8,5 +8,6 @@ router.post('/forgotPassword',UserController.forgotPassword)
 router.get('/getUsers',UserController.getUsers)
 router.put('/resetPassword',UserController.resetPassword)
 router.get('/listAllUsers',UserController.ListAllUsers)
+router.post('/login',UserController.login)
 
 export default router
